@@ -8,7 +8,6 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Nghiem Quynh
@@ -17,12 +16,13 @@ public class HomeForm extends javax.swing.JPanel {
 
     static info info;
     static theXP theXP;
-    private Boolean input= false;
-    private boolean cardready= false;
-    private boolean connected= false;
+    private Boolean input = false;
+    private boolean cardready = false;
+    private boolean connected = false;
     public byte[] rsaPubKey = new byte[128];
     String ht;
     int sd;
+
     /**
      * Creates new form Home
      */
@@ -31,8 +31,8 @@ public class HomeForm extends javax.swing.JPanel {
         theXP = new theXP();
         initComponents();
     }
-    
-     public void setCommandAPDU(byte[] cmnds, byte lc,byte[] data, byte le) {
+
+    public void setCommandAPDU(byte[] cmnds, byte lc, byte[] data, byte le) {
         txt_cla.setText(theXP.byteToHex(cmnds[0]));
         txt_ins.setText(theXP.byteToHex(cmnds[1]));
         txt_p1.setText(theXP.byteToHex(cmnds[2]));
@@ -47,13 +47,13 @@ public class HomeForm extends javax.swing.JPanel {
         txt_cmd.setText(temp);
         txt_le.setText(theXP.byteToHex(le));
     }
-     
+
     //hien thi apdu phan hoi len
-    public void setResponseAPDU(byte[] datares,short le) {
+    public void setResponseAPDU(byte[] datares, short le) {
         int status1 = theXP.resAPDU.getSW1();
         int status2 = theXP.resAPDU.getSW2();
-        txt_sw1.setText(theXP.shorttoHex((short)status1));
-        txt_sw2.setText(theXP.shorttoHex((short)status2));
+        txt_sw1.setText(theXP.shorttoHex((short) status1));
+        txt_sw2.setText(theXP.shorttoHex((short) status2));
         if (le != 0 && datares.length != 0) {
             //hien thi du lieu ra
             String temp = "";
@@ -64,26 +64,28 @@ public class HomeForm extends javax.swing.JPanel {
             txt_respon.setText(temp);
         }
     }
-    
-      public int check_pin(String pin) {
+
+    public int check_pin(String pin) {
         short lc = (short) pin.length(); //do dai du lieu gui vao applet
         short le = 1;//du lieu nhan mong doi (Le)
         byte[] cmd = {(byte) 0xA0, (byte) 0x19, (byte) 0x00, (byte) 0x00};
         byte[] data = pin.getBytes();
-        setCommandAPDU(cmd, (byte)lc, data,(byte)le);
+        setCommandAPDU(cmd, (byte) lc, data, (byte) le);
         theXP.sendAPDUtoApplet(cmd, data);
         byte[] dataRes = theXP.resAPDU.getData();
-        int lenRes= theXP.resAPDU.getNr() ;
-        setResponseAPDU(dataRes, (byte)lenRes);
+        int lenRes = theXP.resAPDU.getNr();
+        setResponseAPDU(dataRes, (byte) lenRes);
         //String a = new String(dataRes);
-        if (dataRes[0] == (byte)0x01) {//đúng mã PIN
+        if (dataRes[0] == (byte) 0x01) {//đúng mã PIN
             return 1;
-        } else if(dataRes[0] == (byte)0x00){
+        } else if (dataRes[0] == (byte) 0x00) {
             return 0;
-        }else return 2;
+        } else {
+            return 2;
+        }
     }
-    
-    public void MVlist(){
+
+    public void MVlist() {
 //        Main.connection.cnSQL("jdbc:mysql://localhost:3306/cinema", "root","");
 //        String tvSQL2 = "select * from movies";
 //        ResultSet rsdv = Main.connection.HienThongTin(tvSQL2);
@@ -142,6 +144,7 @@ public class HomeForm extends javax.swing.JPanel {
         Button_Unblock = new javax.swing.JButton();
         btn_sendata = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
+        btn_sendata1 = new javax.swing.JButton();
 
         jLabel68.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel68.setText("APDU Lệnh");
@@ -186,6 +189,11 @@ public class HomeForm extends javax.swing.JPanel {
         txt_lc.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
 
         txt_le.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        txt_le.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_leActionPerformed(evt);
+            }
+        });
 
         jLabel75.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel75.setText("Dữ liệu:");
@@ -253,6 +261,14 @@ public class HomeForm extends javax.swing.JPanel {
         btn_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_clearActionPerformed(evt);
+            }
+        });
+
+        btn_sendata1.setText("Xem thông tin");
+        btn_sendata1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_sendata1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sendata1ActionPerformed(evt);
             }
         });
 
@@ -324,7 +340,8 @@ public class HomeForm extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btn_init, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Button_connect, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_sendata, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btn_sendata, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_sendata1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(76, 76, 76)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Button_Disconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,7 +404,9 @@ public class HomeForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_sendata, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_sendata1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -404,8 +423,8 @@ public class HomeForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_responActionPerformed
 
     private void Button_connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_connectActionPerformed
-        Main.connection.cnSQL("jdbc:mysql://localhost:3306/cinema", "root","");
-        if(theXP.connectApplet() == true){//thiet lap ket noi
+        Main.connection.cnSQL("jdbc:mysql://localhost:3306/market", "root", "Bach682001");
+        if (theXP.connectApplet() == true) {//thiet lap ket noi
             byte[] cmd = {(byte) 0x00, (byte) 0xA4, (byte) 0x04, (byte) 0x00};// select
             //mang data gui di la RID,PIX
             byte[] data = {(byte) 0x11, (byte) 0x22, (byte) 0x33, (byte) 0x44, (byte) 0x55, (byte) 0x00};
@@ -415,18 +434,19 @@ public class HomeForm extends javax.swing.JPanel {
             theXP.sendAPDUtoApplet(cmd, data);
             byte[] dataRes = theXP.resAPDU.getData();
             int le = theXP.resAPDU.getNr();
-            setResponseAPDU(dataRes, (short)le);//hien thi du lieu phan hoi tu applet
+            setResponseAPDU(dataRes, (short) le);//hien thi du lieu phan hoi tu applet
             Button_connect.setText("Đang kết nối...");
             Button_connect.setBackground(Color.green);
             Button_Disconnect.setText("Ngắt kết nối");
             Button_Disconnect.setBackground(Color.gray);
             MVlist();
             connected = true;
-        }else JOptionPane.showMessageDialog(this, "Kết nối không thành công. Hãy thử lại.");
+        } else
+            JOptionPane.showMessageDialog(this, "Kết nối không thành công. Hãy thử lại.");
     }//GEN-LAST:event_Button_connectActionPerformed
 
     private void Button_DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_DisconnectActionPerformed
-        if(theXP.disconnectApplet() == true){
+        if (theXP.disconnectApplet() == true) {
             Button_connect.setText("Kết nối");
             Button_connect.setBackground(Color.gray);
             Button_Disconnect.setText("Đã ngắt kết nối");
@@ -443,91 +463,121 @@ public class HomeForm extends javax.swing.JPanel {
             txt_le.setText("");
             connected = false;
             cardready = false;
-        }
-        else JOptionPane.showMessageDialog(this, "Ngắt kết nối không thành công.");
+        } else
+            JOptionPane.showMessageDialog(this, "Ngắt kết nối không thành công.");
     }//GEN-LAST:event_Button_DisconnectActionPerformed
 
     private void btn_initActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_initActionPerformed
-        if(connected == true){
+        if (connected == true) {
             if (input == false) {
-                EnterInfoForm initform = new EnterInfoForm();
+                InfoInputForm initform = new InfoInputForm();
+             
                 initform.setVisible(true);
                 initform.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Thẻ đã có dữ liệu");
             }
-            else JOptionPane.showMessageDialog(null, "Thẻ đã có dữ liệu");
-        }else JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
+        } else
+            JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
     }//GEN-LAST:event_btn_initActionPerformed
 
     private void Button_UnblockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_UnblockActionPerformed
-        if(connected==true){
+        if (connected == true) {
             byte[] cmd = {(byte) 0xA0, (byte) 0x20, (byte) 0x00, (byte) 0x00};
-            byte[] data= {0};
-            setCommandAPDU(cmd,(byte)0, data, (byte)0);//hien thi apdu cmd len GUI
+            byte[] data = {0};
+            setCommandAPDU(cmd, (byte) 0, data, (byte) 0);//hien thi apdu cmd len GUI
             theXP.sendAPDUtoApplet(cmd);
-            byte[] dataRes= theXP.resAPDU.getData();
-            int le= theXP.resAPDU.getNr();
-            setResponseAPDU(dataRes,(short) le);//hien thi du lieu phan hoi tu applet
+            byte[] dataRes = theXP.resAPDU.getData();
+            int le = theXP.resAPDU.getNr();
+            setResponseAPDU(dataRes, (short) le);//hien thi du lieu phan hoi tu applet
             JOptionPane.showMessageDialog(null, "Thẻ đã được mở khóa.");
-        }else JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
+        } else
+            JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
     }//GEN-LAST:event_Button_UnblockActionPerformed
 
     private void btn_sendataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sendataActionPerformed
-        if(connected == true){
+        if (connected == true) {
             if (input == false) {
                 //chuyen du lieu xuong applet
                 String sothe = info.getSothe();
                 String hoten = info.getHoten();
                 String ngaysinh = info.getNgaysinh();
+               
                 String pin = info.getPin();
-                String arraysend = sothe.concat(".").concat(hoten).concat(".").concat(ngaysinh).concat(".").concat(pin);
-                System.out.println("send:"+arraysend);
+                System.out.println("pin to apley0" + pin);
+                String cmnd = info.getCmnd();
+                String sdt = info.getSdt();
+                String arraysend = sothe.concat(".").concat(hoten)
+                        .concat(".").concat(ngaysinh)
+                        .concat(".").concat(pin);
+//                        .concat(".").concat(sdt)
+//                        .concat(".").concat(cmnd);
+                System.out.println("send:" + arraysend);
                 int lc = arraysend.length();
                 byte datalen = (byte) lc; //do dai du lieu gui vao applet
                 byte[] cmd = {(byte) 0xA0, (byte) 0x10, (byte) 0x00, (byte) 0x00};
                 byte[] data = arraysend.getBytes();
-                setCommandAPDU(cmd, (byte)lc, data, (byte)0);
+                setCommandAPDU(cmd, (byte) lc, data, (byte) 0);
                 theXP.sendAPDUtoApplet(cmd, data);
                 byte[] dataRes = theXP.resAPDU.getData();
                 int le = theXP.resAPDU.getNr();
-                setResponseAPDU(dataRes, (byte)le);//hien thi du lieu phan hoi tu applet
-                String tach = new String(dataRes) ;
-                System.out.print("a:"+tach);
-                String[] a = tach.split(":");
-                String st = a[0];
-                ht = a[1];
-                String ns = a[2];
-                byte[] cmd1 = {(byte) 0xA0, (byte) 0x21, (byte) 0x00, (byte) 0x00};
-                theXP.sendAPDUtoApplet(cmd1);
-                byte[] b = theXP.resAPDU.getData();
-                String sodu = "";
-                for (int i = 0; i < b.length; i++) {
-                    sodu += theXP.byteToHex(b[i]);
-                }
+                setResponseAPDU(dataRes, (byte) le);//hien thi du lieu phan hoi tu applet
+//                String tach = new String(dataRes);
+//                System.out.print("a:" + tach);
+//                String[] a = tach.split(":");
+//                String st = a[0];
+//                ht = a[1];
+//                String ns = a[2];
+//                byte[] cmd1 = {(byte) 0xA0, (byte) 0x21, (byte) 0x00, (byte) 0x00};
+//                theXP.sendAPDUtoApplet(cmd1);
+//                byte[] b = theXP.resAPDU.getData();
+//                String sodu = "";
+//                for (int i = 0; i < b.length; i++) {
+//                    sodu += theXP.byteToHex(b[i]);
+//                }
 //                sd = Integer.valueOf(sodu,16).intValue();
 //                txt_sodiem.setText(""+Integer.valueOf(sodu,16).intValue());
                 input = true;
             } else {
                 JOptionPane.showMessageDialog(null, "Thẻ đã có dữ liệu.");
             }
-        }else JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
+        } else
+            JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
     }//GEN-LAST:event_btn_sendataActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
-        if(connected ==true){
-            if(input == false){ JOptionPane.showMessageDialog(null, "Thẻ chưa có dữ liệu.");
-            }else{
+        if (connected == true) {
+            if (input == false) {
+                JOptionPane.showMessageDialog(null, "Thẻ chưa có dữ liệu.");
+            } else {
                 byte[] cmd = {(byte) 0xA0, (byte) 0x18, (byte) 0x00, (byte) 0x00};
                 byte[] data = {0};
-                setCommandAPDU(cmd,(byte)0, data, (byte)0);//hien thi apdu cmd len GUI
+                setCommandAPDU(cmd, (byte) 0, data, (byte) 0);//hien thi apdu cmd len GUI
                 theXP.sendAPDUtoApplet(cmd);
-                byte[] dataRes= theXP.resAPDU.getData();
-                int le= theXP.resAPDU.getNr();
-                setResponseAPDU(dataRes,(short) le);//hien thi du lieu phan hoi tu applet
+                byte[] dataRes = theXP.resAPDU.getData();
+                int le = theXP.resAPDU.getNr();
+                setResponseAPDU(dataRes, (short) le);//hien thi du lieu phan hoi tu applet
                 JOptionPane.showMessageDialog(null, "Thẻ đã xóa dữ liệu.");
-                input=false;
+                input = false;
             }
-        }else JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
+        } else
+            JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void txt_leActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_leActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_leActionPerformed
+
+    private void btn_sendata1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sendata1ActionPerformed
+        if (connected == true) {
+            InfoForm initform = new InfoForm();
+            initform.setVisible(true);
+            initform.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            initform.setData(info);
+            System.out.println("name:"+initform.info.getHoten());
+        } else
+            JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
+    }//GEN-LAST:event_btn_sendata1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -537,6 +587,7 @@ public class HomeForm extends javax.swing.JPanel {
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_init;
     private javax.swing.JButton btn_sendata;
+    private javax.swing.JButton btn_sendata1;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel70;

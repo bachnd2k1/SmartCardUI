@@ -4,6 +4,7 @@
  */
 package com.mycompany.market;
 
+import static com.mycompany.market.HomeForm.theXP;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -41,6 +42,7 @@ public class InfoForm extends javax.swing.JFrame {
         info = new info();
         theXP = new theXP();
         initComponents();
+
     }
 
     /**
@@ -120,12 +122,15 @@ public class InfoForm extends javax.swing.JFrame {
         txt_sothe = new javax.swing.JLabel();
         txt_hoten = new javax.swing.JLabel();
         txt_ngaysinh = new javax.swing.JLabel();
-        txt_sodiem = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txt_sodiem1 = new javax.swing.JLabel();
         btn_changePIN = new javax.swing.JButton();
         btn_capnhat = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_pin = new javax.swing.JPasswordField();
+        Btn_Xemtt = new javax.swing.JButton();
+        txt_sodiem2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,10 +171,8 @@ public class InfoForm extends javax.swing.JFrame {
 
         txt_ngaysinh.setText("null");
 
-        txt_sodiem.setText("0");
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setText("Số điểm:");
+        jLabel8.setText("CMND:");
 
         txt_sodiem1.setText("0");
 
@@ -194,27 +197,51 @@ public class InfoForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Nhập mã PIN:");
+
+        txt_pin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_pinActionPerformed(evt);
+            }
+        });
+
+        Btn_Xemtt.setBackground(new java.awt.Color(51, 204, 0));
+        Btn_Xemtt.setText("Enter");
+        Btn_Xemtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_XemttActionPerformed(evt);
+            }
+        });
+
+        txt_sodiem2.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_pin, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(Btn_Xemtt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_changePIN, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(btn_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(anhthe, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(Btn_thayanh, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(19, 19, 19)
+                                .addComponent(Btn_thayanh, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(118, 118, 118)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,14 +251,13 @@ public class InfoForm extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel10))
                         .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_sodiem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_ngaysinh, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txt_hoten, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_sothe, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_sodiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_sodiem1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_sodiem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,29 +279,34 @@ public class InfoForm extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_sodiem))
+                            .addComponent(txt_sodiem2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(txt_sodiem1))
                         .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(anhthe, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                    .addComponent(anhthe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(Btn_thayanh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel4))))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_pin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Xemtt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_changePIN, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -306,7 +337,7 @@ public class InfoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_thayanhActionPerformed
 
     private void btn_changePINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changePINActionPerformed
-        if (connected == true && cardready == true) {
+        if (theXP.connectApplet() == true) {
             updatePIN updatepin = new updatePIN();
             updatepin.setVisible(true);
             updatepin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -315,37 +346,90 @@ public class InfoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_changePINActionPerformed
 
     private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
-        if (connected == true && cardready == true) {
-            updateInfoForm updateinfo = new updateInfoForm(txt_sothe.getText(), txt_hoten.getText(), txt_ngaysinh.getText());
-            updateinfo.setVisible(true);
-            updateinfo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        } else
-            JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
+//        if (connected == true && cardready == true) {
+//            updateInfoForm updateinfo = new updateInfoForm(txt_sothe.getText(), txt_hoten.getText(), txt_ngaysinh.getText());
+//            updateinfo.setVisible(true);
+//            updateinfo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        } else
+//            JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
     }//GEN-LAST:event_btn_capnhatActionPerformed
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseExited
 
-      public int check_pin(String pin) {
+    private void txt_pinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_pinActionPerformed
+
+    private void Btn_XemttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_XemttActionPerformed
+        if(theXP.connectApplet() == true){
+            String pin = Arrays.toString(txt_pin.getPassword());
+            System.out.println("pass: " + pin);
+            if(check_pin(pin) == 0) JOptionPane.showMessageDialog(null,"Mã PIN sai. Vui lòng nhập lại.");
+            else if (check_pin(pin) == 1){
+                cardready =true;
+              
+                byte[] cmd = {(byte) 0xA0, (byte) 0x11, (byte) 0x00, (byte) 0x00};
+                byte[] data= {0};
+                setCommandAPDU(cmd,(byte)0, data, (byte)0);//hien thi apdu cmd len GUI
+                theXP.sendAPDUtoApplet(cmd);
+                byte[] dataRes = theXP.resAPDU.getData();
+                int le = theXP.resAPDU.getNr();
+                setResponseAPDU(dataRes, (byte)le);//hien thi du lieu phan hoi tu applet
+                String tach = new String(dataRes) ;
+                //System.out.print("a:"+tach);
+                String[] a = tach.split(":");
+                String st = a[0];
+                ht = a[1];
+                String ns = a[2];
+                txt_sothe.setText(st);
+                txt_hoten.setText(ht);
+                txt_ngaysinh.setText(ns);
+                txt_sodiem2.setText("0123456789");
+                txt_sodiem1.setText("0123456789");
+                 getImage(info.getAvatar());
+                byte[] cmd1 = {(byte) 0xA0, (byte) 0x21, (byte) 0x00, (byte) 0x00};
+                theXP.sendAPDUtoApplet(cmd1);
+                byte[] b = theXP.resAPDU.getData();
+                String sodu = "";
+                for (int i = 0; i < b.length; i++) {
+                    sodu += theXP.byteToHex(b[i]);
+                }
+                sd = Integer.valueOf(sodu,16).intValue();
+                if (sd >=10){
+                    info.setRank("VIP");
+                }
+                System.out.println("avatar" + info.getAvatar());
+//                setImage(info.getAvatar());
+//                getImage(info.getAvatar());
+//                txt_xephang.setText(info.getRank());
+//                txt_sodiem.setText(""+sd);
+            }else JOptionPane.showMessageDialog(null, "Bạn đã nhập sai quá số lần cho phép. Thẻ đã bị khóa!");
+        }else JOptionPane.showMessageDialog(null, "Chưa connect thẻ");
+    }//GEN-LAST:event_Btn_XemttActionPerformed
+
+    public int check_pin(String pin) {
         short lc = (short) pin.length(); //do dai du lieu gui vao applet
         short le = 1;//du lieu nhan mong doi (Le)
         byte[] cmd = {(byte) 0xA0, (byte) 0x19, (byte) 0x00, (byte) 0x00};
         byte[] data = pin.getBytes();
-        setCommandAPDU(cmd, (byte)lc, data,(byte)le);
+        setCommandAPDU(cmd, (byte) lc, data, (byte) le);
         theXP.sendAPDUtoApplet(cmd, data);
         byte[] dataRes = theXP.resAPDU.getData();
-        int lenRes= theXP.resAPDU.getNr() ;
-        setResponseAPDU(dataRes, (byte)lenRes);
+        int lenRes = theXP.resAPDU.getNr();
+        setResponseAPDU(dataRes, (byte) lenRes);
         //String a = new String(dataRes);
-        if (dataRes[0] == (byte)0x01) {//đúng mã PIN
+        if (dataRes[0] == (byte) 0x01) {//đúng mã PIN
             return 1;
-        } else if(dataRes[0] == (byte)0x00){
+        } else if (dataRes[0] == (byte) 0x00) {
             return 0;
-        }else return 2;
+        } else {
+            return 2;
+        }
     }
-      
-      public void setCommandAPDU(byte[] cmnds, byte lc,byte[] data, byte le) {
+
+    public void setCommandAPDU(byte[] cmnds, byte lc, byte[] data, byte le) {
 //        txt_cla.setText(theXP.byteToHex(cmnds[0]));
 //        txt_ins.setText(theXP.byteToHex(cmnds[1]));
 //        txt_p1.setText(theXP.byteToHex(cmnds[2]));
@@ -360,10 +444,9 @@ public class InfoForm extends javax.swing.JFrame {
 //        txt_cmd.setText(temp);
 //        txt_le.setText(theXP.byteToHex(le));
     }
-      
-      
+
     //hien thi apdu phan hoi len
-    public void setResponseAPDU(byte[] datares,short le) {
+    public void setResponseAPDU(byte[] datares, short le) {
 //        int status1 = theXP.resAPDU.getSW1();
 //        int status2 = theXP.resAPDU.getSW2();
 //        txt_sw1.setText(theXP.shorttoHex((short)status1));
@@ -378,8 +461,17 @@ public class InfoForm extends javax.swing.JFrame {
 //            txt_respon.setText(temp);
 //        }
     }
-    
-    
+    static void setData(info in) {
+         InfoForm infoForm = new InfoForm();
+        infoForm.setVisible(true);
+        infoForm.info = in;
+//         infoForm.txt_sothe.setText(in.getSothe());
+//        infoForm.setImage(in.getAvatar());
+//        infoForm.txt_hoten.setText(in.getHoten());
+//        infoForm.txt_ngaysinh.setText(in.getNgaysinh());
+//        infoForm.txt_sodiem.setText(in.getSdt());
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -407,12 +499,13 @@ public class InfoForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InfoForm().setVisible(true);
+//                new InfoForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Xemtt;
     private javax.swing.JButton Btn_thayanh;
     private javax.swing.JLabel anhthe;
     private javax.swing.JButton btn_capnhat;
@@ -420,6 +513,7 @@ public class InfoForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -427,8 +521,9 @@ public class InfoForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel txt_hoten;
     private javax.swing.JLabel txt_ngaysinh;
-    private javax.swing.JLabel txt_sodiem;
+    private javax.swing.JPasswordField txt_pin;
     private javax.swing.JLabel txt_sodiem1;
+    private javax.swing.JLabel txt_sodiem2;
     private javax.swing.JLabel txt_sothe;
     // End of variables declaration//GEN-END:variables
 }

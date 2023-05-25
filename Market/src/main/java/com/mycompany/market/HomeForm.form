@@ -97,6 +97,7 @@
                                   <Component id="btn_init" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="Button_connect" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="btn_sendata" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="btn_sendata1" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -179,7 +180,9 @@
                   <Component id="btn_sendata" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btn_clear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btn_sendata1" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -289,6 +292,9 @@
           <Font name="Agency FB" size="18" style="1"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_leActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel75">
       <Properties>
@@ -417,6 +423,19 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_clearActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_sendata1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Xem th&#xf4;ng tin"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sendata1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

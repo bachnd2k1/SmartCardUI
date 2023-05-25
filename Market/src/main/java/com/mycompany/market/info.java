@@ -10,23 +10,40 @@ package com.mycompany.market;
  * @author ZZ
  */
 public class info {
-    private String sothe, hoten, ngaysinh, pin, rank;
+
+    private String sothe, hoten, ngaysinh, pin, rank, cmnd, sdt;
     private byte[] avatar;
-    public info(String sothe, String hoten, String ngaysinh,String pin,byte[] avatar, String rank) {
+
+    public info(String sothe, String hoten, String ngaysinh, String pin, byte[] avatar, String rank) {
         this.sothe = sothe;
         this.hoten = hoten;
         this.ngaysinh = ngaysinh;
         this.pin = pin;
-        this.avatar= avatar;
+        this.avatar = avatar;
         this.rank = rank;
     }
 
+    public info() {
 
-
-    public info(){
-        
     }
 
+    public String getCmnd() {
+        return cmnd;
+    }
+
+    public void setCmnd(String cmnd) {
+        this.cmnd = cmnd;
+    }
+
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+
+  
     public byte[] getAvatar() {
         return avatar;
     }
@@ -42,7 +59,6 @@ public class info {
     public void setSothe(String sothe) {
         this.sothe = sothe;
     }
-    
 
     public String getHoten() {
         return hoten;
@@ -51,7 +67,7 @@ public class info {
     public String getRank() {
         return rank;
     }
-    
+
     public void setHoten(String hoten) {
         this.hoten = hoten;
     }
@@ -71,9 +87,9 @@ public class info {
     public void setPin(String pin) {
         this.pin = pin;
     }
-    
+
     public void setRank(String rank) {
         this.rank = rank;
     }
-    
+
 }

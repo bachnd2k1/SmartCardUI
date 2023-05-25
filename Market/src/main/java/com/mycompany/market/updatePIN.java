@@ -18,7 +18,7 @@ public class updatePIN extends javax.swing.JFrame {
      * Creates new form updatePIN
      */
     public updatePIN() {
-//        this.theXP = CinemaForm.theXP;
+        theXP = new theXP();
         initComponents();
     }
 
@@ -125,7 +125,8 @@ public class updatePIN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_changePINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changePINActionPerformed
-        String pin = Arrays.toString(txt_pinnow.getPassword());
+        if (theXP.connectApplet() == true) {
+                String pin = Arrays.toString(txt_pinnow.getPassword());
         byte[] cmd = {(byte) 0xA0, (byte) 0x19, (byte) 0x00, (byte) 0x00};
         byte[] pindata = pin.getBytes();
         theXP.sendAPDUtoApplet(cmd, pindata);
@@ -154,6 +155,8 @@ public class updatePIN extends javax.swing.JFrame {
                 else JOptionPane.showMessageDialog(this, "Thay đổi PIN không thành công.");
             }
         }else JOptionPane.showMessageDialog(this, "Bạn đã nhập sai quá số lần cho phép. Thẻ đã bị khóa!");
+        }
+    
     }//GEN-LAST:event_btn_changePINActionPerformed
 
     private void txt_pinnowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pinnowActionPerformed
