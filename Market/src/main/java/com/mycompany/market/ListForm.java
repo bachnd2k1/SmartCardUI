@@ -4,10 +4,19 @@
  */
 package com.mycompany.market;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,11 +25,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListForm extends javax.swing.JFrame {
 
+    static List<Product> products;
+    static Product product;
+
     /**
      * Creates new form ListForm
      */
     public ListForm() {
         initComponents();
+        products = new ArrayList<>();
+
     }
 
     /**
@@ -34,12 +48,12 @@ public class ListForm extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMovies = new javax.swing.JTable();
+        tblView = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         tfSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        btnAddMovies = new javax.swing.JButton();
-        btnBookTicket = new javax.swing.JButton();
+        btnAddToCart = new javax.swing.JButton();
+        btnViewCart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,7 +61,7 @@ public class ListForm extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Danh sách sản phẩm");
 
-        tblMovies.setModel(new javax.swing.table.DefaultTableModel(
+        tblView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -58,7 +72,7 @@ public class ListForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblMovies);
+        jScrollPane1.setViewportView(tblView);
 
         jLabel7.setText("Tìm kiếm:");
 
@@ -69,17 +83,17 @@ public class ListForm extends javax.swing.JFrame {
             }
         });
 
-        btnAddMovies.setText("Thêm vào giỏ hàng");
-        btnAddMovies.addActionListener(new java.awt.event.ActionListener() {
+        btnAddToCart.setText("Thêm vào giỏ hàng");
+        btnAddToCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddMoviesActionPerformed(evt);
+                btnAddToCartActionPerformed(evt);
             }
         });
 
-        btnBookTicket.setText("Xem giỏ hàng");
-        btnBookTicket.addActionListener(new java.awt.event.ActionListener() {
+        btnViewCart.setText("Xem giỏ hàng");
+        btnViewCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBookTicketActionPerformed(evt);
+                btnViewCartActionPerformed(evt);
             }
         });
 
@@ -104,9 +118,9 @@ public class ListForm extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addComponent(btnAddMovies, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddToCart, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnViewCart, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
         );
         layout.setVerticalGroup(
@@ -123,8 +137,8 @@ public class ListForm extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddMovies, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddToCart, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewCart, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
         );
 
@@ -133,17 +147,16 @@ public class ListForm extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        if(tfSearch.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập thông tin");
-        }
-        else{
-            Main.connection.cnSQL("jdbc:mysql://localhost:3306/cinema", "root","");
-            String tvSQL2 = "select * from movies where name like N'%"+tfSearch.getText()+"%'";
+        if (tfSearch.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin");
+        } else {
+            Main.connection.cnSQL("jdbc:mysql://localhost:3306/cinema", "root", "");
+            String tvSQL2 = "select * from movies where name like N'%" + tfSearch.getText() + "%'";
             ResultSet rsdv = Main.connection.HienThongTin(tvSQL2);
             System.out.println(rsdv);
-            Object[] obj = new Object[]{"STT","Mã Phim","Tên phim","Số ghế","Ngày chiếu","Phòng Chiếu","Giá vé"};
+            Object[] obj = new Object[]{"STT", "Mã Phim", "Tên phim", "Số ghế", "Ngày chiếu", "Phòng Chiếu", "Giá vé"};
             DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
-            tblMovies.setModel(tableModel);
+            tblView.setModel(tableModel);
             int c = 0;
             try {
                 while (rsdv.next()) {
@@ -164,21 +177,124 @@ public class ListForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnAddMoviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMoviesActionPerformed
-        // TODO add your handling code here:
-//        ThemPhim tp = new ThemPhim();
-//        tp.setVisible(true);
-//        tp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_btnAddMoviesActionPerformed
+    private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
+        openQuantitySelectionForm();
+    }//GEN-LAST:event_btnAddToCartActionPerformed
 
-    private void btnBookTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookTicketActionPerformed
-        // TODO add your handling code here:
-        int i = tblMovies.getSelectedRow();
-//        int SLMaPhim = Integer.parseInt(tblMovies.getValueAt(i,1).toString());
-//        BookTicketForm btf = new BookTicketForm(txt_hoten.getText(), SLMaPhim, sd);
-//        btf.setVisible(true);
-//        btf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_btnBookTicketActionPerformed
+    private void btnViewCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCartActionPerformed
+        if (!products.isEmpty()) {
+            CartForm infoForm = new CartForm();
+            infoForm.setVisible(true);
+            infoForm.setData(products);
+        } else {
+            JOptionPane.showMessageDialog(null, "Giỏ hàng chưa có sản phẩm");
+        }
+
+    }//GEN-LAST:event_btnViewCartActionPerformed
+
+    static void setData() {
+        ListForm infoForm = new ListForm();
+        infoForm.setVisible(true);
+        Main.connection.cnSQL("jdbc:mysql://localhost:3306/market", "root", "Bach682001");
+//        String tvSQL2 = "select * from movies";
+//        ResultSet rsdv = Main.connection.HienThongTin(tvSQL2);
+//        List<Object[]> data = convertResultSetToList(rsdv);
+//        System.out.println(rsdv);
+
+        List<Object[]> data = new ArrayList<>();
+        data.add(new Object[]{1, "Product 1", "Bánh", "1", "100000"});
+        data.add(new Object[]{2, "Product 2", "Kẹo", "2", "200000"});
+        data.add(new Object[]{3, "Product 3", "Sữa", "1", "15000"});
+        Object[] obj = new Object[]{"STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá"};
+//        DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
+        AbstractTableModel tableModel = new AbstractTableModel() {
+            @Override
+            public int getRowCount() {
+                return data.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return obj.length;
+            }
+
+            @Override
+            public Object getValueAt(int row, int column) {
+                return data.get(row)[column];
+            }
+
+            @Override
+            public String getColumnName(int column) {
+                return obj[column].toString();
+            }
+        };
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        infoForm.tblView.setDefaultRenderer(Object.class, centerRenderer);
+
+        infoForm.tblView.setModel(tableModel);
+
+        infoForm.tblView.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = infoForm.tblView.getSelectedRow();
+
+                // Get the number of columns in the table
+                int columnCount = infoForm.tblView.getColumnCount();
+
+                // Create an array to hold the values of the selected row
+                Object[] rowValues = new Object[columnCount];
+
+                // Retrieve the values from each column of the selected row
+                for (int col = 0; col < columnCount; col++) {
+                    rowValues[col] = infoForm.tblView.getValueAt(selectedRow, col);
+                }
+
+                // Perform your logic based on the values of the selected row
+                System.out.println("Clicked Row Values: " + Arrays.toString(rowValues));
+
+                product = new Product();
+//                product.setStt(rowValues[0].toString());
+                product.setId(rowValues[1].toString());
+                product.setName(rowValues[2].toString());
+                product.setMaxItem(rowValues[3].toString());
+                product.setPrice(rowValues[4].toString());
+
+//                products.add(product);
+            }
+        });
+    }
+
+    private void openQuantitySelectionForm() {
+        if (product != null) {
+            QuantitySelectionForm quantityForm = new QuantitySelectionForm(product, new QuantitySelectionListener() {
+                @Override
+                public void onQuantitySelected(Product product) {
+                    System.out.println("Selected Product: " + product.getName() + ", Quantity: " + product.getQuantity());
+                    products.add(product);
+                     JOptionPane.showMessageDialog(null, "Thêm sản phảm vào giỏ hàng thành công");
+                }
+            });
+            quantityForm.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn sản phẩm nào");
+        }
+    }
+
+    public List<Object[]> convertResultSetToList(ResultSet resultSet) throws SQLException {
+        List<Object[]> dataList = new ArrayList<>();
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        int columnCount = metaData.getColumnCount();
+        while (resultSet.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                row[i - 1] = resultSet.getObject(i);
+            }
+            dataList.add(row);
+        }
+
+        return dataList;
+    }
 
     /**
      * @param args the command line arguments
@@ -216,13 +332,13 @@ public class ListForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddMovies;
-    private javax.swing.JButton btnBookTicket;
+    private javax.swing.JButton btnAddToCart;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnViewCart;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblMovies;
+    private javax.swing.JTable tblView;
     private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
 }

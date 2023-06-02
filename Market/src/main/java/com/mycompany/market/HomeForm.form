@@ -93,20 +93,24 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="btn_sendata" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="btn_sendata1" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="btn_sendata3" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="Button_connect" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="btn_init" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="Button_connect" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="btn_sendata" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="btn_sendata1" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="Button_Disconnect" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="Button_Unblock" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="btn_clear" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="btn_sendata2" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="txt_respon" alignment="0" min="-2" pref="429" max="-2" attributes="0"/>
+                          <Component id="txt_respon" min="-2" pref="429" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -165,24 +169,29 @@
                   <Component id="txt_respon" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="jLabel79" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Button_connect" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="Button_Disconnect" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_init" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="Button_Unblock" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_sendata" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btn_clear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btn_sendata1" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_sendata1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btn_sendata2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btn_sendata3" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -436,6 +445,32 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sendata1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_sendata2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mua h&#xe0;ng"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sendata2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_sendata3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#x1ea1;p ti&#x1ec1;n v&#xe0;o th&#x1ebb;"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sendata3ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

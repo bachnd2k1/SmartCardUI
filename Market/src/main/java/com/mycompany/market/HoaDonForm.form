@@ -209,7 +209,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="M&#xe3; th&#x1ebb;:"/>
+            <Property name="text" type="java.lang.String" value="CMND:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbGiochieu">

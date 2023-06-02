@@ -462,14 +462,9 @@ public class InfoForm extends javax.swing.JFrame {
 //        }
     }
     static void setData(info in) {
-         InfoForm infoForm = new InfoForm();
+        InfoForm infoForm = new InfoForm();
         infoForm.setVisible(true);
         infoForm.info = in;
-//         infoForm.txt_sothe.setText(in.getSothe());
-//        infoForm.setImage(in.getAvatar());
-//        infoForm.txt_hoten.setText(in.getHoten());
-//        infoForm.txt_ngaysinh.setText(in.getNgaysinh());
-//        infoForm.txt_sodiem.setText(in.getSdt());
     }
 
     public static void main(String args[]) {

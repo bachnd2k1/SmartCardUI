@@ -45,9 +45,9 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-              <Component id="btnAddMovies" min="-2" pref="155" max="-2" attributes="0"/>
+              <Component id="btnAddToCart" min="-2" pref="155" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnBookTicket" min="-2" pref="142" max="-2" attributes="0"/>
+              <Component id="btnViewCart" min="-2" pref="142" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -67,8 +67,8 @@
               <Component id="jScrollPane1" pref="316" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAddMovies" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="btnBookTicket" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="btnAddToCart" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnViewCart" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
           </Group>
@@ -92,7 +92,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblMovies">
+        <Component class="javax.swing.JTable" name="tblView">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -121,20 +121,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddMovies">
+    <Component class="javax.swing.JButton" name="btnAddToCart">
       <Properties>
         <Property name="text" type="java.lang.String" value="Th&#xea;m v&#xe0;o gi&#x1ecf; h&#xe0;ng"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddMoviesActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddToCartActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBookTicket">
+    <Component class="javax.swing.JButton" name="btnViewCart">
       <Properties>
         <Property name="text" type="java.lang.String" value="Xem gi&#x1ecf; h&#xe0;ng"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBookTicketActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewCartActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

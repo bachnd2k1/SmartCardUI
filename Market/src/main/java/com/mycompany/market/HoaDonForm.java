@@ -93,7 +93,7 @@ public class HoaDonForm extends javax.swing.JFrame {
 
         lbNameMov.setText("null");
 
-        jLabel8.setText("Mã thẻ:");
+        jLabel8.setText("CMND:");
 
         lbGiochieu.setText("null");
 
