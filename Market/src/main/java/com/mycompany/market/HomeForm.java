@@ -51,7 +51,9 @@ public class HomeForm extends javax.swing.JPanel {
     //hien thi apdu phan hoi len
     public void setResponseAPDU(byte[] datares, short le) {
         int status1 = theXP.resAPDU.getSW1();
+        System.out.println("status1:" + status1);
         int status2 = theXP.resAPDU.getSW2();
+        System.out.println("status2:" + status2);
         txt_sw1.setText(theXP.shorttoHex((short) status1));
         txt_sw2.setText(theXP.shorttoHex((short) status2));
         if (le != 0 && datares.length != 0) {
@@ -62,6 +64,8 @@ public class HomeForm extends javax.swing.JPanel {
                 temp += " ";
             }
             txt_respon.setText(temp);
+
+            //TODO: save user => to db
         }
     }
 
